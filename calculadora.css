@@ -61,3 +61,7 @@ table_history {
 .largerkey {
     width: 156px;
 }
+
+.tr_hystory:hover{
+    cursor: pointer;
+}

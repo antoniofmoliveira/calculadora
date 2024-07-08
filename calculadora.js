@@ -43,12 +43,21 @@ const get_formated_date = (date) => {
     return `${day}/${month}/${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
 };
 
-const move_history = (origem) => {
-    const destino = origem + 1;
-    const time_origem = document.getElementById("time" + origem);
-    const hist_origem = document.getElementById("hist" + origem);
-    const time_destino = document.getElementById("time" + destino);
-    const hist_destino = document.getElementById("hist" + destino);
-    hist_destino.innerText = hist_origem.innerText;
-    time_destino.innerText = time_origem.innerText;
+const move_history = (origin) => {
+    const destination = origin + 1;
+    const time_origin = document.getElementById("time" + origin);
+    const hist_origin = document.getElementById("hist" + origin);
+    const time_destination = document.getElementById("time" + destination);
+    const hist_destination = document.getElementById("hist" + destination);
+    hist_destination.innerText = hist_origin.innerText;
+    time_destination.innerText = time_origin.innerText;
+};
+
+const recover_history = (origin) => {
+    const recovered = document.getElementById("hist" + origin).innerText.trim();
+    if (recovered.length <= 0) return;
+    document.getElementById("display").innerText = document.getElementById(
+        "hist" + origin
+    ).innerText;
+    equal_typed = false;
 };
