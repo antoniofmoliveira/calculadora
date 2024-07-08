@@ -16,22 +16,22 @@
     margin-left: 1rem;
 }
 
-.table_calculadora {
+.table_calculator {
     width: 100%;
     border-color: black;
     border-width: 1px;
     border: 1px;
 }
 
-table_historico {
+table_history {
     width: 100%;
     border-color: black;
     border-width: 1px;
     border: 1px;
 }
 
-.visor,
-.versao {
+.display,
+.version {
     border: 5px;
     border-color: black;
     height: 2rem;
@@ -44,7 +44,7 @@ table_historico {
     width: 80rem;
 }
 
-.tecla {
+.key {
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
@@ -58,6 +58,6 @@ table_historico {
     padding: 6px;
 }
 
-.teclamaior {
+.largerkey {
     width: 156px;
 }

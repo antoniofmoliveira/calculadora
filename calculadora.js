@@ -1,31 +1,37 @@
-let totalizou = false;
+let equal_typed = false;
 
 const onclick_handle = (value) => {
-    if (totalizou) {
+    if (equal_typed) {
         onclick_c();
-        totalizou = false;
+        equal_typed = false;
     }
-    document.getElementById("visor").innerText += value;
+    document.getElementById("display").innerText += value;
 };
 
 const onclick_ce = () => {
-    document.getElementById("visor").innerText = visor.innerText.slice(0, -1);
+    document.getElementById("display").innerText = document
+        .getElementById("display")
+        .innerText.slice(0, -1);
 };
 
 const onclick_c = () => {
-    document.getElementById("visor").innerText = "";
+    document.getElementById("display").innerText = "";
 };
 
 const onclick_equal = () => {
-    move_historico(3);
-    move_historico(2);
-    move_historico(1);
-    document.getElementById("time1").innerText = get_formated_date(new Date());
-    document.getElementById("hist1").innerText = visor.innerText;
-    document.getElementById("visor").innerText = eval(
-        document.getElementById("visor").innerText
-    );
-    totalizou = true;
+    try {
+        const result = eval(document.getElementById("display").innerText);
+        move_history(3);
+        move_history(2);
+        move_history(1);
+        document.getElementById("time1").innerText = get_formated_date(
+            new Date()
+        );
+        document.getElementById("hist1").innerText =
+            document.getElementById("display").innerText;
+        document.getElementById("display").innerText = result;
+        equal_typed = true;
+    } catch {}
 };
 
 const get_formated_date = (date) => {
@@ -37,7 +43,7 @@ const get_formated_date = (date) => {
     return `${day}/${month}/${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
 };
 
-const move_historico = (origem) => {
+const move_history = (origem) => {
     const destino = origem + 1;
     const time_origem = document.getElementById("time" + origem);
     const hist_origem = document.getElementById("hist" + origem);
