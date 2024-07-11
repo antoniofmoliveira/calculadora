@@ -12,7 +12,31 @@ const onclick_handle = (value) => {
         onclick_c();
         equal_typed = false;
     }
-    document.getElementById("display").innerText += value;
+    let element = document.getElementById("display");
+    let disp_text = element.innerText.trim();
+    let is_dup_op =
+        (disp_text.endsWith("**") ||
+            disp_text.endsWith("/") ||
+            disp_text.endsWith("+") ||
+            disp_text.endsWith("-")) &&
+        (value === "*" || value === "/" || value === "+" || value === "-");
+    let is_first_not_valid =
+        disp_text.trim() === "" && (value === "*" || value === "/");
+    if (
+        is_dup_op ||
+        is_first_not_valid ||
+        (value === "." && element.innerText.indexOf(".") > -1) ||
+        (value === "0" && element.innerText === "0")
+    ) {
+        return;
+    }
+    element.innerText += value;
+    try {
+        eval(document.getElementById("display").innerText);
+        document.getElementById("alerta").style.backgroundColor = "white";
+    } catch {
+        document.getElementById("alerta").style.backgroundColor = "red";
+    }
 };
 
 /**
@@ -22,6 +46,12 @@ const onclick_ce = () => {
     document.getElementById("display").innerText = document
         .getElementById("display")
         .innerText.slice(0, -1);
+    try {
+        eval(document.getElementById("display").innerText);
+        document.getElementById("alerta").style.backgroundColor = "white";
+    } catch {
+        document.getElementById("alerta").style.backgroundColor = "red";
+    }
 };
 
 /**
@@ -56,7 +86,7 @@ const onclick_equal = () => {
  * @param {*} date a date
  * @returns  date in pt-BR format DD/MM/YYYY HH:MM:SS
  */
- const get_formated_date = (date) => {
+const get_formated_date = (date) => {
     const day = `0${date.getDate()}`.slice(-2);
     const month = `0${date.getMonth() + 1}`.slice(-2);
     const hours = `0${date.getHours()}`.slice(-2);
@@ -68,7 +98,7 @@ const onclick_equal = () => {
 /**
  * moves a history entry to a higher position
  * there are four positions in history
- * @param {*} origin 
+ * @param {*} origin
  */
 const move_history = (origin) => {
     const destination = origin + 1;
